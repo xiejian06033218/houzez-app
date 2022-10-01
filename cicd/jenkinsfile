@@ -30,7 +30,7 @@ pipeline {
         echo 'Deploying to AWS s3 bucket.'
         // withAWS(region:'<ap-southeast-2c>', credentials:'') {
         //s3Delete(bucket: '<houzez.app>', path:'**/*')
-        s3Upload(bucket: '<houzez.app>', includePathPattern:'**/*')
+        //s3Upload(bucket: '<houzez.app>', includePathPattern:'**/*')
       }
     }
   }    

@@ -5,7 +5,7 @@ pipeline {
     }
   }
   environment {
-    S3bucket_name = 's3://houzez.app'
+    S3bucket_name = 'houzez.app'
   }
   stages {
     stage('Install Packages') {
@@ -25,13 +25,14 @@ pipeline {
         // sh 'npm run test...'
       }
     }
-    stage('Deploy to S3') {
-      steps {
-        echo 'Deploying to AWS s3 bucket.'
-        // withAWS(region:'<ap-southeast-2c>', credentials:'') {
-        //s3Delete(bucket: '<houzez.app>', path:'**/*')
-        //s3Upload(bucket: '<houzez.app>', includePathPattern:'**/*')
-      }
+    stage('Upload') {
+        steps {
+            echo 'Deploying to AWS s3 bucket.'
+            withAWS(region:'ap-southeast-2',credentials:'houzez-app') {
+                s3Delete(bucket:"houzez.app", path:'');
+                s3Upload(bucket:"houzez.app", workingDir:'dist', includePathPattern:'**/*');
+            }
+        };
     }
   }    
 }

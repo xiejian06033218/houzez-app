@@ -1,51 +1,37 @@
 pipeline {
   agent {
     docker {
-      image 'node:12.13.0'
+      image 'node:16.17'
     }
   }
   environment {
-    CI = 'true'
-    houzez_environment = 'UAT'
-    S3bucket_name = ''
-    Workspace_path
+    S3bucket_name = 's3://houzez.app'
   }
   stages {
     stage('Install Packages') {
       steps {
-        sh 'echo "Installing Packages..."'
         sh 'npm install'
       }
     }
     stage('build') {
       steps {
         echo "building ..."
-        // echo "running job : ${env.job_name}...."
-        // sh 'npm run build: uat-houzez-app...'
+        sh 'npm run build'
       }
     }
     stage('Test') {
       steps {
         sh 'echo "Testing ..."'
-        // sh 'npm run test...'  // umi test 
+        // sh 'npm run test...'
       }
     }
-    stage('Install AWS CLI') {
+    stage('Deploy to S3') {
       steps {
-        echo "Install AWS CLI ..."
-        // install AWS cli in jenkins container
-        sh 'apt-get update'
-        sh 'apt install python3-pip -y'
-        sh 'pip3 install awscli --upgrade' 
+        echo 'Deploying to AWS s3 bucket.'
+        // withAWS(region:'<ap-southeast-2c>', credentials:'') {
+        //s3Delete(bucket: '<houzez.app>', path:'**/*')
+        //s3Upload(bucket: '<houzez.app>', includePathPattern:'**/*')
       }
-    }
-    stage('Deploy to UAT') {
-      steps {
-        deploytoS3(..)
-        echo "Deploy ..."
-        
-      }
-      when 
     }
   }    
 }

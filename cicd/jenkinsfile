@@ -1,11 +1,7 @@
 pipeline {
   agent {
     docker {
-<<<<<<< HEAD
       image 'node:16.17'
-=======
-      image 'node:18.7.17'
->>>>>>> 8569f6afb59346f91833863fa79291b0a2620157
     }
   }
   environment {

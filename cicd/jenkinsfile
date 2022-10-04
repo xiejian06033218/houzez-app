@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    any {
-        tools {nodejs "node16.17"}
-    }
-  }
+  agent any
   environment {
     S3bucket_name = 'houzez.app'
   }

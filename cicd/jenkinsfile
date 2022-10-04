@@ -1,7 +1,7 @@
 pipeline {
 
   agent any
-  tools {NodeJS "node 16.17.0"}
+  tools {NodeJS ""}
   environment {
     S3bucket_name = 'houzez.app'
   }
@@ -14,7 +14,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        echo "building ..."
+        sh 'echo "building ..."'
         sh 'npm run build'
       }
     }

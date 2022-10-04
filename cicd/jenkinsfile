@@ -1,8 +1,7 @@
 pipeline {
+  
   agent any
-  environment {
-    S3bucket_name = 'houzez.app'
-  }
+
   stages {
     stage('Install Packages') {
       steps {

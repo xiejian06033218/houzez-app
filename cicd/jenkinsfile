@@ -1,8 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'node:16'
-      alwaysPull true
+    any {
+        tools {nodejs "node16.17"}
     }
   }
   environment {
@@ -29,7 +28,7 @@ pipeline {
     stage('Upload') {
         steps {
             echo 'Deploying to AWS s3 bucket.'
-            withAWS(region:'ap-southeast-2',credentials:'houzez-app') {
+            withAWS(region:'ap-southeast-2',credentials:'houzez_app') {
                 s3Delete(bucket:"houzez.app", path:'');
                 s3Upload(bucket:"houzez.app", workingDir:'dist', includePathPattern:'**/*');
             }

@@ -1,0 +1,40 @@
+pipeline {
+
+  agent {
+    docker {
+      image 'node 16.17.0'
+    }
+  }
+
+  environment {
+    S3bucket_name = 'houzez.app'
+  }
+  stages {
+    stage('Install Packages') {
+      steps {
+        sh 'npm install'
+      }
+    }
+    stage('build') {
+      steps {
+        sh 'echo "building ..."'
+        sh 'npm run build'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'echo "Testing ..."'
+        // sh 'npm run test...'
+      }
+    }
+    stage('Upload') {
+        steps {
+            echo 'Deploying to AWS s3 bucket.'
+            withAWS(region:'ap-southeast-2',credentials:'houzez_app') {
+                s3Delete(bucket:"houzez.app", path:'');
+                s3Upload(bucket:"houzez.app", workingDir:'dist', includePathPattern:'**/*');
+            }
+        };
+    }
+  }    
+}

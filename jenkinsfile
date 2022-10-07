@@ -31,7 +31,7 @@ pipeline {
             echo 'Deploying to AWS s3 bucket.'
             withAWS(region:'ap-southeast-2',credentials:'houzez_app') {
                 s3Delete(bucket:"houzez.app", path:'');
-                s3Upload(bucket:"houzez.app", workingDir:'dist', includePathPattern:'**/*');
+                s3Upload(bucket:"houzez.app", includePathPattern:'**/*');
             }
         };
     }

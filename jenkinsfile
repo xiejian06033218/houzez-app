@@ -5,7 +5,6 @@ pipeline {
       image 'node:16.17.0'
     }
   }
-
   environment {
     S3bucket_name = 'houzez.app'
   }

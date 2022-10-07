@@ -32,7 +32,7 @@ pipeline {
             echo 'Deploying to AWS s3 bucket.'
             withAWS(region:'ap-southeast-2',credentials:'houzez_app') {
                 s3Delete(bucket:"houzez.app", path:'');
-                s3Upload(bucket:"houzez.app", includePathPattern:'**/*');
+                s3Upload(bucket:"houzez.app", includePathPattern:'**/*',sh 'aws s3 sync /var/lib/jenkins/workspace/houzez_app_frontend_cicid s3://houzez.app/ --exclude "node_modules/*"');
             }
         };
     }

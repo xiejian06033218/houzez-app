@@ -18,7 +18,7 @@ pipeline {
         PROJECT_NAME = "houzez-app"
       }
       steps {
-        withSonarQubeEnv(installationName: 'sonarqube_jenkins_houzez_app', credentialsId: 'sonar_jenkins_houzez_frontend_pipeline') {
+        withSonarQubeEnv(installationName: 'sonar_jenkins_houzez_frontend_pipeline', credentialsId: 'sonar_jenkins_houzez_frontend_pipeline') {
             sh '''$SCANNER_HOME/bin/sonar-scanner \
             -Dsonar.organization=houzezp3project \
             -Dsonar.projectKey=zhangrunqing6599_houzez-app \

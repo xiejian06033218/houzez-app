@@ -14,14 +14,14 @@ pipeline {
       environment {
         SCANNER_HOME = tool 'sonarqubescanner'
         SONAR_TOKEN = credentials('SonarCloudhouzezapp')
-        ORGANIZATION = "houzezp3project"
+        ORGANIZATION = "houzez_app_frontend"
         PROJECT_NAME = "houzez-app"
       }
 
       steps {
         withSonarQubeEnv(installationName: 'SonarCloudhouzezapp', credentialsId: 'SonarCloudhouzezapp') {
             sh '''$SCANNER_HOME/bin/sonar-scanner \
-            -Dsonar.organization=zhangrunqing6599 \
+            -Dsonar.organization=$ORGANIZATION \
             -Dsonar.projectKey=houzezp3project \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io'''

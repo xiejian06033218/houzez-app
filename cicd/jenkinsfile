@@ -10,6 +10,22 @@ pipeline {
     S3bucket_name = 'houzez.app'
   }
   stages {
+    stage('Sonar Cloud') {
+      environment {
+        SCANNER_HOME = tool 'sonarqubescanner_houzez_app_jenkins'
+        ORGANIZATION = "zhangrunqing6599"
+        PROJECT_NAME = "houzez-app"
+      }
+      steps {
+        withSonarQubeEnv('sonarqube_jenkins_houzez_app') {
+            sh '''$SCANNER_HOME/bin/sonar-scanner \
+            -Dsonar.organization=houzezp3project \
+            -Dsonar.projectKey=zhangrunqing6599_houzez-app \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io'''
+        }
+      }
+    }
     stage('Install Packages') {
       steps {
         sh 'npm install'

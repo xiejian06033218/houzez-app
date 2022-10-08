@@ -13,7 +13,8 @@ pipeline {
     stage('Sonar Cloud') {
       environment {
         SCANNER_HOME = tool 'sonarqubescanner_houzez_app_jenkins'
-        ORGANIZATION = "zhangrunqing6599"
+        SONAR_TOKEN = credentials('sonar_jenkins_houzez_frontend_pipeline')
+        ORGANIZATION = "houzezp3project"
         PROJECT_NAME = "houzez-app"
       }
       steps {

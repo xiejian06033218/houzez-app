@@ -27,12 +27,6 @@ pipeline {
             -Dsonar.host.url=https://sonarcloud.io'''
         }
       }
-    stage("Quality Gate") {
-      steps {
-        timeout(time: 1, unit: 'MINUTES') {
-            waitForQualityGate webhookSecretId: 'sonar_jenkins_houzez_frontend_pipeline'
-        }
-      } 
     }
     stage('Install Packages') {
       steps {

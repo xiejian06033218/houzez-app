@@ -15,7 +15,7 @@ pipeline {
         SCANNER_HOME = tool 'sonarqubescanner'
         SONAR_TOKEN = credentials('SonarCloudhouzezapp')
         ORGANIZATION = "houzez_app_frontend"
-        PROJECT_NAME = "houzez-app"
+        PROJECT_NAME = "zhangrunqing6599_houzez-app"
       }
 
       steps {

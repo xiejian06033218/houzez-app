@@ -17,8 +17,9 @@ pipeline {
         ORGANIZATION = "houzezp3project"
         PROJECT_NAME = "houzez-app"
       }
+
       steps {
-        withSonarQubeEnv(installationName: 'sonar_jenkins_houzez_frontend_pipeline', credentialsId: 'sonar_jenkins_houzez_frontend_pipeline') {
+        withSonarQubeEnv(installationName: 'sonarqubescanner_houzez_app_jenkins', credentialsId: 'sonar_jenkins_houzez_frontend_pipeline') {
             sh '''$SCANNER_HOME/bin/sonar-scanner \
             -Dsonar.organization=houzezp3project \
             -Dsonar.projectKey=zhangrunqing6599_houzez-app \
@@ -26,6 +27,12 @@ pipeline {
             -Dsonar.host.url=https://sonarcloud.io'''
         }
       }
+    stage("Quality Gate") {
+      steps {
+        timeout(time: 1, unit: 'MINUTES') {
+            waitForQualityGate webhookSecretId: 'sonar_jenkins_houzez_frontend_pipeline'
+        }
+      } 
     }
     stage('Install Packages') {
       steps {
